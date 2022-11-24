@@ -10,16 +10,12 @@ class Student(models.Model):
     # Float data type column (decimal number)
     gpa = models.FloatField()
 
-
-
 # Create your models here.
 
 class Instructor(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     hire_date = models.DateField()
-
-
 
 class Course(models.Model):
     name = models.CharField(max_length=40)

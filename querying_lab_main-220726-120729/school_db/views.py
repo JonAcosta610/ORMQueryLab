@@ -146,10 +146,11 @@ SELECT `school_db_instructor`.`id`,
 # Print the instructors name and courses that he belongs to in the terminal
 # (Do not hard code his name in the print)
 def problem_three(request):
-  instructor_course = Course.objects.get(instructor_id = 2)
+  instructor = Instructor.objects.get(pk=2)
+  instructor_course = Course.objects.filter(instructor_id=2)
 
   for course in instructor_course:
-    print(f"Instructor Name: {instructor.name}\nCourses:\n- {course.name}\n- {course.name}")
+    print(f"Instructor Name: {instructor.first_name} {instructor.last_name}\nCourses:\n- {course.name}\n- {course.name}")
 
   return complete(request)
 
@@ -244,9 +245,9 @@ SELECT COUNT(*) AS `__count`
 # Print the new student's id, full name, year, and gpa to the terminal
 # NOTE every time you execute this function a duplicate student will be created with a different primary key number
 def problem_five(request):
-  new_student_one = Student.objects.create(first_name = "Mike", last_name = "Jones", year = 9, gpa = 1.5)
+  new_student = Student.objects.create(first_name = "Mike", last_name = "Jones", year = 9, gpa = 1.5)
   print()
-  print(f"{new_student_one}\nFull Name: {new_student_one.first_name} {new_student_one.last_name}\nYear: {new_student_one.year}\nGPA: {new_student_one.gpa}")
+  print(f"ID: {new_student}\nFull Name: {new_student.first_name} {new_student.last_name}\nYear: {new_student.year}\nGPA: {new_student.gpa}")
 
   return complete(request)
 
@@ -279,11 +280,15 @@ VALUES ('Kyle', 'Harwood', 2022, 3.0)
 # Then query the studets table to get that student by their id
 # Print the new student's id, full name, and gpa to the terminal
 def problem_six(request):
+  update_student = Student.objects.filter(id = 11).update(gpa = 2.1)
+  Student.objects.get(id = 11)
+  for student in update_student:
+    print(f"ID: {student.id},\nFull Name: {student.first_name} {student.last_name},\nYear: {student.year},\nGPA: {student.gpa}")
 
     # Make sure to set this equal to the primary key of the row you just created!
     student_id = 11
 
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
